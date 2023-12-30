@@ -2,10 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://example.org/categories/</loc>
+    <loc>https://example.org/posts/941.-searching-for-items-in-an-array/</loc>
+    <lastmod>2023-12-31T06:46:49+09:00</lastmod>
+  </url><url>
+    <loc>https://example.org/tags/go/</loc>
+    <lastmod>2023-12-31T06:46:49+09:00</lastmod>
+  </url><url>
+    <loc>https://example.org/tags/leetcode/</loc>
+    <lastmod>2023-12-31T06:46:49+09:00</lastmod>
+  </url><url>
+    <loc>https://example.org/posts/</loc>
+    <lastmod>2023-12-31T06:46:49+09:00</lastmod>
   </url><url>
     <loc>https://example.org/tags/</loc>
+    <lastmod>2023-12-31T06:46:49+09:00</lastmod>
   </url><url>
     <loc>https://example.org/</loc>
+    <lastmod>2023-12-31T06:46:49+09:00</lastmod>
+  </url><url>
+    <loc>https://example.org/posts/896.-monotonic-array/</loc>
+    <lastmod>2023-12-31T06:46:00+09:00</lastmod>
+  </url><url>
+    <loc>https://example.org/posts/859.-buddy-string/</loc>
+    <lastmod>2023-12-31T06:41:19+09:00</lastmod>
+  </url><url>
+    <loc>https://example.org/posts/501.-find-mode-in-binary-search-tree/</loc>
+    <lastmod>2023-12-31T06:40:21+09:00</lastmod>
+  </url><url>
+    <loc>https://example.org/posts/326.-power-of-three/</loc>
+    <lastmod>2023-12-31T06:34:41+09:00</lastmod>
+  </url><url>
+    <loc>https://example.org/categories/</loc>
   </url>
 </urlset>

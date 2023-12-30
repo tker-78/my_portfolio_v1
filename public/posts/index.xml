@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tker-78/portfolio</title>
-    <link>https://example.org/</link>
-    <description>Recent content on tker-78/portfolio</description>
+    <title>Posts on tker-78/portfolio</title>
+    <link>https://example.org/posts/</link>
+    <description>Recent content in Posts on tker-78/portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 31 Dec 2023 06:46:49 +0900</lastBuildDate>
-    <atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>941. Searching for Items in an Array</title>
       <link>https://example.org/posts/941.-searching-for-items-in-an-array/</link>
