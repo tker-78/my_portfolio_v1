@@ -1,4 +1,4 @@
-## デプロイ
+## GCPにデプロイ
 GCP(Cloud Run)にデプロイする。
 
 [ここ](https://qiita.com/mikkegt/items/74898c082cd9fa77c5a1)を参考にする。
@@ -38,4 +38,17 @@ $ docker build -t my_portfolio_v1 .
 $ docker run -p 1312:1312 -e PORT=1312 my_portfolio_v1
 ```
 
+コンテナイメージをsubmitする。
+```bash
+$ gcloud builds submit --tag gcr.io/my-portfolio-v1-409721/my-portfolio-v1-container-image
+```
+
+CI/CDの構築がよくわからないので、GitHub Pagesを使った方が良さそう。
+
+
+
+
+## GitHub Pagesにデプロイ
+
+[HUGOのドキュメント](https://gohugo.io/hosting-and-deployment/hosting-on-github/)を参考にする。
 
