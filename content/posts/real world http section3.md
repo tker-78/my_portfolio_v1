@@ -30,8 +30,42 @@ func main() {
 }
 ```
 
-(注意)本文では`iouti`パッケージを使っているが、ioutilはGo 1.16でdepricateになったので、
+(注意)本文では`iouti`パッケージを使っているが、ioutilはGo 1.16でdepricatedになったので、
 `io`パッケージを使用する。  
+
+
+### template
+templateを扱うtemplateHandlerを定義する。  
+
+```go
+type templateHandler struct {
+  once sync.Once,
+  filename string,
+  tmpl *template.Template
+}
+```
+
+下記のメソッドを追加することで、templateHandlerがserverのインターフェースを満たすようにする。
+こうすることで、templateHandlerをHandlerFuncとして渡すことができるようになる。  
+
+また、`sync.Once`を使うことで、複数のgoroutineがserveHTTP()を呼び出したとしても、
+実行されることは1回のみであることを保証できる。  
+
+```go
+func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+  t.Once.Do(func() {
+    t.tmpl = template.Must(template.ParseFiles(filepath.Join("templates", t.filename)))
+  })
+  t.tmpl.Execute(w,r)
+}
+```
+
+```go
+func main() {
+  http.Handle("/", &templateHandler{filename: "chat.html"})
+  http.ListenAndServe(":8080", nil) // localhost:8080でサーバーを起動
+}
+```
 
 
 
