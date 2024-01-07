@@ -105,6 +105,20 @@ func (r *room) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 socket = new WebSocket("ws://localhost:8080/room");
 ```
 
+### プログラムのビルド
+
+chapter1/chat内で、
+```bash
+$ go build -o chat
+```
+として、chat内に実行ファイルを作成する。
+
+```bash
+$ ./chat # プログラムの実行
+```
+
+
+
 以上.  
 
 
