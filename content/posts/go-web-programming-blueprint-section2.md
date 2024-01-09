@@ -1,4 +1,3 @@
-¥
 ---
 title: "Go Web Programming Blueprint Section2"
 date: 2024-01-08T09:10:17+09:00
