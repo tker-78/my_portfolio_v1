@@ -1,4 +1,3 @@
-¥
 ---
 title: "Go Web Programming Blueprint Section2"
 date: 2024-01-08T09:10:17+09:00
@@ -87,4 +86,136 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
   }
 }
 ```
+
+cookieからユーザー名を取り出す。
+```go
+func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+  ...(省略)
+  data := map[string]interface{}{
+    "Host": r.Host,
+  }
+  if authCookie, err := r.Cookie("auth"); err == nil {
+    data["UserSata"] = objx.MustFromBase64(authCookie.Value)
+  }
+  ...(省略)
+}
+```
+
+
+入力したテキストにユーザー名と日時の情報を持たせるために、
+message構造体を作成する。
+
+```go
+type message struct {
+  Name string
+  Message string
+  When time.Time
+}
+```
+
+
+messageでclientとroomを繋ぐ。  
+```go
+type client struct {
+  send: chan *message
+  ...
+  userData: map[string]interface{}
+}
+
+type room struct {
+  forward: chan *message
+}
+```
+
+clientのread(), write()からJSONを扱うように変更する。
+```go
+func (c *client) read() {
+  for {
+    var msg *message
+    if err := c.socket.ReadJson(&msg); err == nil {
+      msg.When = time.Now()
+      msg.Name = c.userDate["name"].(string)
+      c.room.forward <- msg
+    } else {
+      break
+    }
+  }
+  c.socket.Close()
+}
+
+func (c *client) write() {
+  for msg := range c.send {
+    if err := c.socket.WriteJSON(&msg); err != nil {
+      break
+    }
+  }
+  c.socket.Close()
+}
+```
+
+jqueryからのjson呼び出しを実装する。
+```js
+socket.send(JSON.stringify({"Message": msgBox.val()}));
+
+socket.onmessage = function(e) {
+  var msg = JSON.parse(e.data);
+  messages.append(
+    $("<li>").append(
+      $("<strong>").text(msg.Name + ": "),
+      $("<span>").text(msg.Message),
+      $("<span>").text(" " + msg.When),
+    )
+  )
+}
+```
+
+日時のフォーマットをするために、message.MarshalJSON()メソッドを定義して、
+Whenをstringに変換して返す。
+
+```go
+func (msg *message) MarshalJSON() ([]byte, error) {
+  val, err := json.Marshal(&struct{
+    {
+      Name: string,
+      Message: string,
+      When: string,
+    }{
+      Name: msg.Name,
+      Message: msg.Message,
+      When: msg.When.Format("2006年01月02日 15時04分")
+    }
+  })
+  if err != nil {
+    log.Println(err)
+    return val, err
+  }
+  return val, err
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
