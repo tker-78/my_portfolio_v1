@@ -49,6 +49,11 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
+Google Cloudで新規プロジェクトを作成し、
+認証情報の追加 -> OAuth2.0の追加を選択して、
+IDとSecretを取得する。
+
+
 localhost:8080/auth/login/googleにアクセスすると、下記のURLにリダイレクトされる。
 
 ```
