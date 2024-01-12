@@ -2,7 +2,7 @@
 title: "Real World Http Section3"
 date: 2024-01-04T10:28:35+09:00
 tags: ["http", "go"]
-featured_image: "{{ resources.Get 'images/real_world_http.png'}}"
+featured_image: "/assets/images/real_world_http.png"
 description: ""
 ---
 
