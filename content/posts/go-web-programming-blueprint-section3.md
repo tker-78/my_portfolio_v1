@@ -100,7 +100,62 @@ upload.html
 
 
 
+### アップロードしたアバター画像を適用する
 
+authとlocalの画像のどちらを適用するか切り替えられるようにする。  
+
+Avatarインターフェースを作り、room構造体にavatarフィールドを追加する。  
+main.goでのroomオブジェクト作成時に、avatarオブジェクトを渡すことで、
+どちらの画像を適用するか指定できるようにする。
+
+avatar.go
+```go
+type Avatar interface{
+  GetAvatarURL(c *client) (string, error)
+}
+
+type FileSystemAvatar struct{}
+type AuthAvatar struct{}
+
+var fileSystemAvatar FileSysytemAvatar
+var authAvatar AuthAvatar
+
+func (_ FileSystemAvatar) GetAvatarURL(c *client) (url string, err error) {
+  if userid, ok := c.userData["userid"]; ok {
+    if useridStr, ok := userid.(string); ok {
+      return "/avatars/" + useridStr + ".jpg", nil
+    }
+  }
+  return "", nil
+}
+
+func (_ AuthAvatar) GetAvatarURL(c *client) (url string, err error) {
+  if avatarURL, ok := c.userData["avatar_url"]; ok {
+    avatarURLStr := avatarURL.(string)
+    url = avatarURLStr
+    return url, nil
+  }
+  return "", err
+}
+```
+
+room.go
+```go
+func newRoom(avatar Avatar) *room {
+  ...
+  avatar: avatar
+}
+```
+
+そして、client.read()メソッドないのアバター情報の読み出しの箇所を変更する。
+
+client.go
+```go
+msg.AvatarURL, _ := c.room.avatar.GetAvatarURL(c)
+```
+
+
+これで、newRoom()に渡すavatarを指定することで、どちらの画像を適用するか指定できる。
 
 
 
