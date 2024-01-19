@@ -159,10 +159,36 @@ msg.AvatarURL, _ := c.room.avatar.GetAvatarURL(c)
 
 
 
+## Google Cloud Runへのデプロイ
+
+```
+$ gcloud config set project <project_name>
+$ gcloud services enable compute.googleapis.com \
+  run.googleapis.com artifactregistry.googleapis.com \
+  cloudbuild.googleapis.com servicenetworking.googleapis.com
+$ gcloud iam service-accounts create blueprint-service-account \
+  --display-name="Blueprint Service Account" 
+```
 
 
 
+環境変数はデプロイ時に指定してあげるか、
+コンソールから登録する。
+```
+$ gcloud run deploy blueprint \
+  --region=us-central1 \
+  --source=. \
+  --service-account="blueprint-service-account@blueprint-410621.iam.gserviceaccount.com" \
+  --allow-unauthenticated \
+  --set-env-vars security_key="" \
+  --set-env-vars client_id="xxx.apps.googleusercontent.com" \
+  --set-env-vars client_secret="" \
+  --set-env-vars url="https://<app url>/auth/callback/google" 
+```
 
+
+websocketの接続には、`wss://`スキームを指定する。(`ws://`では不安全のため接続できない。)
+localでの実行の際は、`ws`で接続する。  
 
 
 
